@@ -11,8 +11,6 @@ For example, if you enter 2 + 3 instead of choosing the equal sign operator you 
 
 The app should work in a similar manner as shown in the video.
 
-<video src="./src/assets/calculator_demo.mov" controls auto-play loop></video>
-
 ## Technologies
 * ReactJS
 * TailwindCSS
