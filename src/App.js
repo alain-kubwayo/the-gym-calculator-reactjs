@@ -1,7 +1,9 @@
+import Calculator from "./components/Calculator";
+
 function App() {
   return (
-    <div>
-      App Component
+    <div className="w-screen h-screen flex items-center justify-center">
+      <Calculator />
     </div>
   );
 }
