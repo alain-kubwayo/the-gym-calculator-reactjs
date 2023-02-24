@@ -11,6 +11,8 @@ For example, if you enter 2 + 3 instead of choosing the equal sign operator you 
 
 The app should work in a similar manner as shown in the video.
 
+https://user-images.githubusercontent.com/62199230/221216337-6dc057cb-cf23-4e1c-a575-0e95902ed440.mov
+
 ## Technologies
 * ReactJS
 * TailwindCSS
