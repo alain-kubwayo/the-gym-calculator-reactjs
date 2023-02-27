@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const calculatorButtons = [
     { id: 1, description: 'AC' },
     { id: 2, description: '+/-' },
@@ -21,9 +23,71 @@ const calculatorButtons = [
 ];
 
 const Calculator = () => {
+    const [allButtons, setAllButtons] = useState(calculatorButtons);
+    const [operation, setOperation] = useState([]);
+    const [result, setResult] = useState();
+
+    const handleClick = id => {
+        const btn = allButtons.find(button => button.id === id);
+        setOperation(prevOperation => {
+            return [...prevOperation, btn.description];
+        });
+    }
+
+    const handleCalculate = () => {
+        const stringOp = operation.join('');
+        let sign = '';
+        let leftAndRight = [];
+        stringOp.split('').map(c => {
+            if(isNaN(c)){
+                sign = c;
+            }else{
+                leftAndRight.push(c);
+            }
+        })
+        if(sign == '=' || sign == 'AC'){
+            console.log('= or AC button clicked!');
+            stringOp = '';
+            setOperation(null);
+        }
+        const left = Number(stringOp.split(sign)[0]);
+        const right = Number(stringOp.split(sign)[1]);
+
+        switch(sign){
+            case '÷':
+                setResult(left / right);
+                break;
+            case 'X':
+                setResult(left * right);
+                break;
+            case '-':
+                setResult(left - right);
+                break;
+            case '+':
+                setResult(left + right);
+                break;
+            case '%':
+                setResult(left % right);
+                break;
+            default: return;
+        }
+    }
+    
     return ( 
-        <div className="bg-sky-500 h-1/2 w-1/4 grid grid-cols-4">
-            {calculatorButtons.map(button => <div key={button.id} className={`bg-violet-900 border border-black self-center w-full h-full ${button.id === 17 ? 'col-span-2' : ''}`}>{button.description}</div>)}
+        <div className="grid w-1/4 grid-cols-4 h-1/2">
+            <div className="col-span-4 bg-gray-400">
+                <p className="text-right">{operation && operation.join('').split('=')}</p>
+                <p className="text-right">{result}</p>
+            </div>
+            {allButtons.map(button => (
+                <div 
+                    key={button.id} 
+                    className={`border border-gray-300 self-center w-full h-full flex items-center justify-center cursor-pointer ${button.id === 17 && 'col-span-2'} ${button.id % 4 === 0 || button.id === calculatorButtons.length ? 'bg-yellow-500 text-white' : 'bg-gray-100'}`} 
+                    onClick={() => {
+                        button.description != '=' && button.description != '+/-' && button.description != 'AC' ? handleClick(button.id) : handleCalculate()
+                    }}
+                >{button.description}</div>
+            ))}
         </div>
     );
 }
