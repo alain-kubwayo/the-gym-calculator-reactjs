@@ -39,11 +39,7 @@ const Calculator = () => {
         let sign = '';
         let leftAndRight = [];
         stringOp.split('').map(c => {
-            if(isNaN(c)){
-                sign = c;
-            }else{
-                leftAndRight.push(c);
-            }
+            isNaN(c) ? sign = c : leftAndRight.push(c);
         })
         if(sign == '=' || sign == 'AC'){
             console.log('= or AC button clicked!');
