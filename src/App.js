@@ -10,17 +10,13 @@ function App() {
   const [result, setResult] = useState(false);
 
   const handleDigit = e => {
-    // no need to have two dots as decimal
     if(currState.includes('.') && e.target.innerText === '.') return;
     if(result){
       setPreState("");
     }
-    // allow users to type two or more similar digits/nums
     currState 
       ? setCurrState(prevCurrState => prevCurrState + e.target.innerText) 
       : setCurrState(e.target.innerText);
-
-    // set result back to false to get ready for the next calculation
     setResult(false);
   }
 
